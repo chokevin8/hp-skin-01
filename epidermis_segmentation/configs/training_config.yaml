@@ -1,0 +1,41 @@
+# Training configuration for epidermis segmentation
+
+# Data settings
+patch_root: patches
+split_file: patches/data_splits.json
+patch_size: 384
+
+# Training settings
+batch_size: 16
+num_workers: 8
+num_epochs: 200
+early_stopping_patience: 15
+
+# Optimizer settings
+learning_rate: 1.0e-4
+weight_decay: 1.0e-5
+gradient_clip: 1.0
+
+# Loss function
+loss: dice  # Options: dice, soft_dice, focal_dice, combined
+loss_params:
+  smooth: 1.0e-6
+  apply_sigmoid: true
+
+# Learning rate scheduler
+lr_factor: 0.5
+lr_patience: 10
+min_lr: 1.0e-6
+
+# Wandb settings
+wandb_api_key: 056cc8f5fd5428b2d91107a96c0da5f5ae1c3476
+wandb_project: epidermis-segmentation
+
+# Model settings
+model:
+  encoders:
+    - resnet50
+    - efficientnet-b3
+  decoder_channels: [256, 128, 64, 32, 16]
+  decoder_use_batchnorm: true
+  decoder_attention_type: null  # Options: null, scse

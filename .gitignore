@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Data
+dataset/*/Binary_Mask/
+patches/
+*.h5
+*.csv
+
+# Results
+experiments/
+evaluation_results/
+checkpoints/
+logs/
+results/
+preprocessing_logs.csv
+patching_logs.txt
+
+# Wandb
+wandb/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Conda
+*.egg-info/

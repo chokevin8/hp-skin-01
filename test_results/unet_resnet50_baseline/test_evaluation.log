@@ -1,0 +1,52 @@
+2025-07-18 11:19:21,466 - INFO - Evaluating UNET + resnet50
+2025-07-18 11:19:21,582 - INFO - Using device: cuda
+2025-07-18 11:19:21,582 - INFO - Loading checkpoint from: experiments/unet_resnet50_baseline/checkpoints/best.pth
+2025-07-18 11:19:22,270 - INFO - Initialized U-Net with resnet50 encoder, input channels: 3, output classes: 1
+2025-07-18 11:19:23,262 - INFO - Loaded from epoch 14
+2025-07-18 11:19:23,263 - INFO - Best val Dice from checkpoint: 0.6866776390867505
+2025-07-18 11:19:23,298 - INFO - Model parameters: 32,521,105
+2025-07-18 11:19:23,299 - INFO - Loading TEST dataset...
+2025-07-18 11:19:23,311 - INFO - Loaded 8215 patches for train split
+2025-07-18 11:19:23,312 - INFO - Class distribution - With epidermis: 2895, Without epidermis: 5320
+2025-07-18 11:19:23,323 - INFO - Loaded 1362 patches for val split
+2025-07-18 11:19:23,323 - INFO - Class distribution - With epidermis: 481, Without epidermis: 881
+2025-07-18 11:19:23,334 - INFO - Loaded 1240 patches for test split
+2025-07-18 11:19:23,334 - INFO - Class distribution - With epidermis: 408, Without epidermis: 832
+2025-07-18 11:19:23,336 - INFO - Test dataset size: 1240 patches
+2025-07-18 11:19:23,336 - INFO - Evaluating on 1240 test patches...
+2025-07-18 11:38:41,757 - INFO - Evaluating UNET + resnet50
+2025-07-18 11:38:41,870 - INFO - Using device: cuda
+2025-07-18 11:38:41,871 - INFO - Loading checkpoint from: experiments/unet_resnet50_baseline/checkpoints/best.pth
+2025-07-18 11:38:42,638 - INFO - Initialized U-Net with resnet50 encoder, input channels: 3, output classes: 1
+2025-07-18 11:38:43,277 - INFO - Loaded from epoch 14
+2025-07-18 11:38:43,278 - INFO - Best val Dice from checkpoint: 0.6866776390867505
+2025-07-18 11:38:43,317 - INFO - Model parameters: 32,521,105
+2025-07-18 11:38:43,319 - INFO - Loading TEST dataset...
+2025-07-18 11:38:43,337 - INFO - Loaded 8215 patches for train split
+2025-07-18 11:38:43,338 - INFO - Class distribution - With epidermis: 2895, Without epidermis: 5320
+2025-07-18 11:38:43,357 - INFO - Loaded 1362 patches for val split
+2025-07-18 11:38:43,358 - INFO - Class distribution - With epidermis: 481, Without epidermis: 881
+2025-07-18 11:38:43,375 - INFO - Loaded 1240 patches for test split
+2025-07-18 11:38:43,375 - INFO - Class distribution - With epidermis: 408, Without epidermis: 832
+2025-07-18 11:38:43,377 - INFO - Test dataset size: 1240 patches
+2025-07-18 11:38:43,378 - INFO - Evaluating on 1240 test patches...
+2025-07-18 11:38:49,005 - INFO - Results saved to: test_results/unet_resnet50_baseline/test_results.json
+2025-07-18 11:38:49,019 - INFO - Predictions saved to: test_results/unet_resnet50_baseline/test_predictions.csv
+2025-07-18 11:38:49,019 - INFO - 
+============================================================
+2025-07-18 11:38:49,019 - INFO - TEST SET EVALUATION RESULTS
+2025-07-18 11:38:49,020 - INFO - ============================================================
+2025-07-18 11:38:49,020 - INFO - Total test patches: 1240
+2025-07-18 11:38:49,020 - INFO - Patches with epidermis: 348
+2025-07-18 11:38:49,020 - INFO - Patches without epidermis: 892
+2025-07-18 11:38:49,020 - INFO - ------------------------------------------------------------
+2025-07-18 11:38:49,020 - INFO - EPIDERMIS-ONLY DICE SCORE: 0.6174 ± 0.4439
+2025-07-18 11:38:49,020 - INFO - Median Dice: 0.8971
+2025-07-18 11:38:49,020 - INFO - IoU: 0.5755
+2025-07-18 11:38:49,020 - INFO - Precision: 0.7303
+2025-07-18 11:38:49,020 - INFO - Recall: 0.7309
+2025-07-18 11:38:49,020 - INFO - ------------------------------------------------------------
+2025-07-18 11:38:49,020 - INFO - Histo-Seg: Dice=0.6143 (n=1124)
+2025-07-18 11:38:49,020 - INFO - Queensland: Dice=0.6470 (n=116)
+2025-07-18 11:38:49,020 - INFO - ============================================================
+2025-07-18 11:38:49,021 - INFO - Evaluation complete!

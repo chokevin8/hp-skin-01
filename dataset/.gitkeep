@@ -1,0 +1,2 @@
+# This file ensures the dataset directory structure is preserved in git
+# Actual data files are ignored by .gitignore

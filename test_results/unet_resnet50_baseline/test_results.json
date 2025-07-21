@@ -1,0 +1,23 @@
+{
+  "test_dice_epidermis": 0.617396699954625,
+  "test_dice_std": 0.4439151424473959,
+  "test_dice_median": 0.8971242308616638,
+  "test_iou": 0.5755457975032156,
+  "test_precision": 0.7303244380741345,
+  "test_recall": 0.7308730200728003,
+  "test_specificity": 0.9609884829685424,
+  "test_accuracy": 0.9319258276279682,
+  "num_test_patches": 1240,
+  "num_patches_with_epidermis": 348,
+  "num_patches_without_epidermis": 892,
+  "per_dataset_dice": {
+    "Histo-Seg": {
+      "dice": 0.6143392866556172,
+      "num_patches": 1124
+    },
+    "Queensland": {
+      "dice": 0.6470219805415618,
+      "num_patches": 116
+    }
+  }
+}
