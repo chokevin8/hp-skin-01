@@ -1,8 +1,0 @@
-TEST SET EVALUATION SUMMARY
-==========================
-Epidermis-only Dice Scores:
-
-U-Net + ResNet50              : 0.6174
-U-Net + EfficientNet-B3       : 0.7181
-DeepLabV3+ + ResNet50         : 0.7321
-DeepLabV3+ + EfficientNet-B3  : 0.7736
