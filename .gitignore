@@ -9,38 +9,135 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Data
-dataset/*/Binary_Mask/
-patches/
-*.h5
-*.csv
-
-# Results
-experiments/
-evaluation_results/
-checkpoints/
-logs/
-results/
-preprocessing_logs.csv
-patching_logs.txt
-
-# Wandb
-wandb/
-
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb
-
-# IDE
-.vscode/
+# IDEs
 .idea/
+.vscode/
+.ipynb_checkpoints
 *.swp
 *.swo
+*~
+
+# Environment
+.env
+.venv
+
+# Medical Image Data  
+*.dcm
+*.svs
+*.ndpi
+*.mrxs
+*.vsi
+*.scn
+# Keep test images if needed
+!test_images/
+
+# Results and outputs
+results/
+output/
+outputs/
+evaluation_results/
+*.xml
+
+# Images (be selective)
+# *.jpg  # May want to keep some test images
+# *.jpeg
+# *.png
+# *.tif
+# *.tiff
+
+# Model weights - KEEP for production
+# Don't ignore the trained model
+!experiments/*/checkpoints/best.pth
+
+# Logs
+*.log
+logs/
+epidermis_analysis.log
+preprocessing_logs.csv
+patching_logs.txt
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Conda
-*.egg-info/
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Security (never commit these)
+*.enc
+*.key
+*.pem
+*.crt
+*.cer
+license.txt
+licenses/
+
+# Test/validation outputs
+test_results/
+validation_results/
+test_*/
+
+# Development files
+*.bak
+*.backup
+archive/
+old/
+backup/
+
+# Wandb
+wandb/
+runs/
+
+# Jupyter notebooks
+*.ipynb
+
+# Data directories (but keep structure files)
+dataset/*/Binary_Mask/
+patches/*
+# Keep important data structure files
+!patches/data_splits.json
+!patches/data_splits_histoseg_only.json
+!patches/*.json
+
+# Keep configuration and documentation
+!configuration/
+!requirements.txt
+!README.md
+!README_PRODUCTION.md
+!CLAUDE.md
+!main.py
+!postprocessing_epidermis.py
+!models/
+!src/
+!medical_image/
+!security_helper/
+!setup_environment.sh
+!run_segmentation.sh
+
+# Reference repository (temporary)
+markerai-her2/
+
+# Old standalone scripts (removed in restructuring)
+run_epidermis_segmentation.py
+
+# Keep logo images
+!medical_image/logo/*.png

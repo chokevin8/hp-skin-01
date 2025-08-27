@@ -1,105 +1,88 @@
-# HP-Skin-01: Epidermis Segmentation Project
+# MarkerAI-Skin
 
-This project implements deep learning models for epidermis segmentation in skin whole slide images using U-Net and DeepLabv3+ architectures.
+Epidermis segmentation software for skin histopathology whole slide image analysis.
 
-## Quick Start
-
-### 1. Setup Environment
+## Installation
 
 ```bash
-# Create and setup conda environment
-bash setup_environment.sh
+# Create conda environment
+conda create -n markerai-skin python=3.9
+conda activate markerai-skin
 
-# Activate environment
-conda activate hp-skin-01
+# Install dependencies
+pip install -r requirements.txt
 ```
 
-### 2. Run Complete Pipeline
+## Usage
 
+### Command Line
 ```bash
-# Run preprocessing and training
-bash run_training.sh
+# Process a single WSI
+python main.py path/to/wsi.jpg --output-format JSON
 
-# Evaluate trained models
-bash run_evaluation.sh
+# Process with specific output directory
+python main.py path/to/wsi.tif --output-dir ./results --output-format JSON
+
+# Process with custom configuration
+python main.py path/to/image.png --config configuration/deepai_epidermis.json --output-format JSON
 ```
 
-## Dataset Structure
+## Core Components
 
-Place your datasets in the following structure:
-```
-dataset/
-├── Histo-Seg/
-│   ├── WSI/          # .jpg files (20x resolution)
-│   └── Mask/         # .jpg files (multiclass masks)
-└── Queensland/
-    ├── WSI/          # .tif files (10x resolution)
-    └── Mask/         # .png files (multiclass masks)
-```
+### EpidermisPipeline (main.py)
+Main pipeline class that orchestrates the entire segmentation workflow:
+- **Inherits from DicomModuleHisto**: Provides medical imaging I/O compliance and future DICOM support
+- **Security integration**: Uses security_helper for operation modes (DEV/SECURED)
+- **WSI processing**: Handles large whole slide images by patch-based processing
+- **Tissue segmentation**: CLAM-inspired tissue detection for efficient processing
 
-## Pipeline Overview
+### EpidermisClassifier (models/epidermis_classifier.py)
+Core segmentation algorithm using DeepLabV3+ with EfficientNet-B3 encoder:
+- **Deep learning model**: Pre-trained on skin histopathology datasets
+- **Patch-based inference**: Processes 384×384 patches
+- **Multi-scale support**: Handles 10x and 20x magnifications
 
-1. **Binary Mask Generation**: Extracts epidermis pixels from multiclass masks
-   - Histo-Seg: RGB(112, 48, 160)
-   - Queensland: RGB(73, 0, 106)
+### EpidermisPostProcessor (postprocessing_epidermis.py)
+Handles output generation and morphological analysis:
+- **Contour extraction**: Converts segmentation masks to coordinate lists
+- **Morphological metrics**: Calculates area and perimeter in mm²/mm
+- **JSON generation**: Creates structured output with contours and measurements
 
-2. **Patch Extraction**: Creates 384×384 patches with tissue segmentation
-   - Non-overlapping patches
-   - Tissue segmentation to remove background
-   - Paired WSI-mask patches
+### DicomModuleHisto (medical_image/generate_dcm.py)
+Base class for medical imaging modules:
+- **Standardized I/O**: Provides consistent interface for medical images
+- **DICOM support**: Ready for DICOM input integration
+- **WSI handling**: Supports various WSI formats through medical_image.utils
+- **Future extensibility**: New methods added here automatically available to EpidermisPipeline
 
-3. **Model Training**: Trains U-Net models with different encoders
-   - ResNet50 encoder
-   - EfficientNet-B3 encoder
-   - Pure Dice loss
-   - Wandb integration for experiment tracking
+## Output Format
 
-4. **Evaluation**: Computes Dice, IoU, and other metrics on test set
+The pipeline generates a JSON file containing:
+- `type`: 'contour'
+- `output_type`: 'JSON'
+- `slide_id`: WSI identifier
+- `short_report`: Morphological measurements (area_mm2, perimeter_mm)
+- `coordinates`: Contour coordinates for epidermis regions
 
-## Models
+## Segmentation Target
+- **Epidermis**: The outermost layer of skin tissue
+- **Binary segmentation**: Epidermis (1) vs. Other tissue (0)
+- **Multi-dataset trained**: Robust to staining variations
 
-- **U-Net with ResNet50**: Balanced performance
-- **U-Net with EfficientNet-B3**: Higher accuracy, more parameters
-- **DeepLabv3+**: Coming soon
+## Configuration
 
-## File Formats
+Main configuration in `configuration/deepai_epidermis.json`:
+- Model settings (encoder, checkpoint path)
+- Tissue segmentation parameters
+- Patch processing settings
+- Visualization options
+- Output directory settings
 
-- **Histo-Seg**: .jpg for both WSI and masks
-- **Queensland**: .tif for WSI (requires OpenSlide), .png for masks
+## Future Integration
 
-## Results
+Since EpidermisPipeline inherits from DicomModuleHisto, future DICOM support can be seamlessly integrated. When DicomModuleHisto adds DICOM processing methods, they will automatically be available to the pipeline through inheritance, requiring minimal code changes.
 
-- Models are saved in `experiments/*/checkpoints/`
-- Evaluation results in `evaluation_results/`
-- Training progress tracked on Weights & Biases
-
-## Troubleshooting
-
-### OpenSlide Installation (for .tif support)
-```bash
-# Ubuntu/Debian
-sudo apt-get install openslide-tools
-
-# macOS
-brew install openslide
-```
-
-### GPU Memory Issues
-- Reduce batch size in `configs/training_config.yaml`
-- Enable gradient accumulation
-- Use mixed precision training
-
-### Environment Issues
-```bash
-# Verify installation
-python -c "import torch; print(f'PyTorch: {torch.__version__}')"
-python -c "import segmentation_models_pytorch as smp; print('SMP installed')"
-```
-
-## Documentation
-
-See `CLAUDE.md` for detailed project documentation and implementation details.
-
-## License
-
-This project is for research purposes only.
+## Requirements
+- Python 3.9+
+- CUDA-capable GPU (optional, for acceleration)
+- See `requirements.txt` for complete dependencies

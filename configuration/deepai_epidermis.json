@@ -1,0 +1,130 @@
+{
+    "version": "1.0.0",
+    "product_name": "HP-Skin-01",
+    "model_name": "EpidermisSegmentation",
+    "info": {
+        "serial_number": "-",
+        "manufacturer_en": "HP-Skin-01 Team",
+        "manufacturer_ko": "HP-Skin-01 팀",
+        "manufacturer_address": "Research Laboratory",
+        "packer": "HP-Skin-01 Team",
+        "distributor": "HP-Skin-01 Team",
+        "intended_uses": "Epidermis segmentation in skin histopathology WSI",
+        "license_no": "-",
+        "item_name": "Epidermis Segmentation Software",
+        "packing_unit": "1 Set",
+        "note": "For research and clinical use",
+        "tissue_threshold": 0.1,
+        "udi": {
+            "udi_di": "(01)0880010880SKIN(10)",
+            "udi_pi": "1.0.0"
+        },
+        "market": "research"
+    },
+    "models": {
+        "epidermis_classifier": {
+            "model_type": "deeplabv3plus",
+            "encoder": "efficientnet-b3",
+            "model_path": "experiments/deeplabv3plus_efficientnetb3_baseline/checkpoints/best.pth",
+            "patch_size": 384,
+            "batch_size": 32,
+            "num_classes": 1,
+            "activation": "sigmoid",
+            "performance": {
+                "dice_score": 0.85,
+                "target_dice": 0.80
+            }
+        },
+        "tissue_segmentation": {
+            "seg_level": -1,
+            "sthresh": 8,
+            "mthresh": 7,
+            "close": 4,
+            "use_otsu": false,
+            "filter_params": {
+                "a_t": 100,
+                "a_h": 16,
+                "max_n_holes": 8
+            }
+        },
+        "visualization": {
+            "opacity": {"value": "0.4"},
+            "threshold": {"value": "0.5"},
+            "resize_factor": {"value": "0"},
+            "overlay_color": {
+                "red": 0,
+                "green": 255,
+                "blue": 0
+            },
+            "#findings": {
+                "checked": ["epidermis", "background"],
+                "list": ["epidermis", "background"],
+                "colors": {
+                    "epidermis": "#00FF00",
+                    "background": "#FFFFFF"
+                }
+            },
+            "@output_type": {
+                "selected": "JSON",
+                "list": ["JPEG", "PNG", "XML", "JSON", "ALL"]
+            },
+            "@write_version": {
+                "selected": "On",
+                "list": ["On", "Off"]
+            }
+        },
+        "secondary_capture": {
+            "enabled": true,
+            "format": "PNG"
+        },
+        "report": {
+            "enabled": true,
+            "format": "JSON",
+            "include_morphological_metrics": true
+        }
+    },
+    "processing": {
+        "tile_size": 384,
+        "overlap": 0,
+        "background_threshold": 0.9,
+        "min_tissue_ratio": 0.1,
+        "morphological_analysis": {
+            "calculate_area": true,
+            "calculate_perimeter": true,
+            "calculate_contours": true,
+            "mpp_10x": 1.0,
+            "mpp_20x": 0.5,
+            "mpp_40x": 0.25,
+            "default_magnification": 20.0
+        }
+    },
+    "output": {
+        "output_dir": "results",
+        "save_overlay": true,
+        "save_mask": true,
+        "save_report": true,
+        "save_metadata": true
+    },
+    "advanced": {
+        "preferred_character_set": "ISO_IR 192",
+        "store_original": "false",
+        "store_result": "true",
+        "use_modality": "WSI",
+        "#slide_exts": {
+            "checked": ["jpg", "png", "tif", "tiff", "svs", "ndpi", "mrxs"],
+            "list": ["jpg", "png", "tif", "tiff", "svs", "ndpi", "mrxs", "vsi", "scn"]
+        },
+        "overlay_color": {
+            "red": 0,
+            "green": 255,
+            "blue": 0
+        },
+        "logo": {
+            "write_logo": "On",
+            "location": "TOP_RIGHT",
+            "background": "On",
+            "background_color": [0, 0, 0, 153],
+            "write_version": "On"
+        }
+    }
+}
