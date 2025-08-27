@@ -4,6 +4,10 @@ DeepLabV3+ model implementation using segmentation_models_pytorch.
 Implements DeepLabV3+ with various encoder backbones for epidermis segmentation.
 """
 
+import os
+# Disable wandb to avoid protobuf compatibility issues
+os.environ['WANDB_MODE'] = 'disabled'
+
 import torch
 import torch.nn as nn
 import segmentation_models_pytorch as smp
